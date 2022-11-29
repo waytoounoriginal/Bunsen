@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 // @Path src\includes.h
 // Contains all the includes and defines for the project.
