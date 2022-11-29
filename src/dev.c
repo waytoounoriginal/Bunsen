@@ -1,2 +1,4 @@
+#include "dev.h"
+
 // @Path src\dev.c
-// ----- To Be Implemented -----
+// Contains functions for developers
