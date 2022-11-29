@@ -50,7 +50,11 @@ void helps(char command[MAX_STRING]) {
         printf("-- exit --\n");
         printf("The exit command... Not much to explain here.\n");
         printf("Usage - 'exit'\n");
-    } else {
+    } else if (strcmp(command,"versionCheck")==0) {
+        printf("-- versionCheck --\n");
+        printf("Type the current version of the program, and it will check if the program is up to date.\n");
+        printf("Usage - 'versionCheck', current version major, current version minor.\n");
+    }  else {
         printf("Unknown command '%s'\nType 'help' for a list of commands.\n", command);
     }
 }
