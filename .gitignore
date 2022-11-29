@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+# To-Do Lists
+*.todo
+
 # Object files
 *.o
 *.ko

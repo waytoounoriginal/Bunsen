@@ -1,10 +1,14 @@
 #include "cli.h"
 
-char commands[6][MAX_STRING] = {
+char commands[10][MAX_STRING] = {
     "help",
     "list",
     "name",
     "initials",
+    "groups",
+    "grouping",
+    "nbconfig",
+    "find",
     "version",
     "exit"
 };
@@ -12,10 +16,16 @@ char commands[6][MAX_STRING] = {
 // @Usage : help();
 // @Brief : Prints the help message.
 void help() {
-    printf("help - show this help\n");
     printf("list - list all elements\n");
-    printf("name - show name of element\n");
-    printf("initials - show initials of element\n");
+    printf("name - show name of a element\n");
+    printf("initials - show initials of a element\n");
+    printf("groups - show all element groups\n");
+    printf("grouping - show the element group of a element\n");
+    printf("nbconfig - show the noble gas configuration of an element\n");
+    printf("find - find an element by atomic number\n");
+
+    printf("help - show this help menu\n");
+    printf("helps - get help on a specific command\n");
     printf("version - show version of program\n");
     printf("exit - exit program\n");
 }
@@ -46,8 +56,30 @@ void command(char command[MAX_STRING]) {
         version();
     } else if (strcmp(command, "exit") == 0) {
         exit(0);
+    } else if (strcmp(command, "groups") == 0) {
+        elementGroups();
+    } else if (strcmp(command, "grouping") == 0) {
+        char element[MAX_STRING];
+        printf("Enter element name: ");
+        scanf("%s", element);
+        specificElementGroup(element);
+    } else if (strcmp(command, "nbconfig") == 0) {
+        char element[MAX_STRING];
+        printf("Enter element name: ");
+        scanf("%s", element);
+        nobleGasConfig(element);
+    } else if (strcmp(command, "find") == 0) {
+        int atomicNumber;
+        printf("Enter atomic number: ");
+        scanf("%d", &atomicNumber);
+        listSpecificElement(atomicNumber);
+    } else if (strcmp(command, "helps") == 0 ) {
+        char input[MAX_STRING];
+        printf("Enter command: ");
+        scanf("%s", input);
+        helps(input);
     } else {
-        printf("Invalid command. Type 'help' for a list of commands.\n");
+        printf("Unknown command '%s'\nType 'help' for a list of commands.\n", command);
     }
 }
 
