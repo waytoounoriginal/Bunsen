@@ -1,5 +1,9 @@
 #include "cli.h"
 
+// @Path src\cli.c
+// Contains the CLI function(s)
+
+// Contains the commands
 char commands[10][MAX_STRING] = {
     "help",
     "list",

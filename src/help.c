@@ -1,5 +1,8 @@
 #include "help.h"
 
+// @Path src\help.c
+// Contains the helps function for the CLI
+
 // @Usage : helps("help");
 // @Brief : Prints the help message for a specific command.
 void helps(char command[MAX_STRING]) {
