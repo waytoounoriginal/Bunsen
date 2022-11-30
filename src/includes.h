@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include <sys/types.h>
+
 // @Path src\includes.h
 // Contains all the includes and defines for the project.
 
