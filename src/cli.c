@@ -29,9 +29,7 @@ char commands[15][MAX_STRING] = {
 // @Brief : Prints the credits.
 void credits()
 {
-    printf("Periodic Bunsen CLI V%d.%d. (c) Jack Spencer %d.\n", VERSION_MAJOR, VERSION_MINOR, VERSION_YEAR);
-    printf("Repository : %s\n", REPOSITORY);
-    printf("License : %s\n", LICENSE);
+    printf("Periodic Bunsen CLI V%d.%d. (c) Jack Spencer %d.\nRepository : %s\nLicense : %s\n", VERSION_MAJOR, VERSION_MINOR, VERSION_YEAR, REPOSITORY, LICENSE);
 }
 
 // @Usage : repo();
