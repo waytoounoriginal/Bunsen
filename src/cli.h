@@ -10,6 +10,6 @@ void credits();
 void repo();
 void help();
 void version();
-void command(char command[MAX_STRING]);
+void command(unsigned char command[MAX_STRING]);
 
-void cli();
+void cli(int argc, char* argv[]);
