@@ -304,7 +304,9 @@ void api_getElementGroup(char element[MAX_STRING]) {
     Prints the noble gas configuration of the element provided.
     The element can be provided as the name or symbol.
 */
-
+void api_getNGConfig(char element[MAX_STRING]) {
+    printf("Command Currently Broken\n");
+}
 
 // @Usage : api_getAtomicNumber("Hydrogen");
 // @Param : element - The name or initials of the element.

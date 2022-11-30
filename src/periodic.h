@@ -41,6 +41,15 @@ typedef struct Element {
 
 extern Element elements[118];
 
+// Contains the elements of the periodic table
+const char elements[118][MAX_STRING];
+const char elementSymbols[118][MAX_STRING];
+const double relativeAtomic[118];
+const int atomicNumbers[118];
+const char allElementGroups[118][MAX_STRING];
+const int elementsSpecificGroup[118];
+const int nobleGases[8];
+
 // GET functions
 void api_getElementName(char element[MAX_STRING]);
 void api_getElementSymbol(char element[MAX_STRING]);
