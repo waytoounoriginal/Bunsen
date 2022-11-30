@@ -5,7 +5,7 @@
 // Contains the CLI function(s)
 
 // Contains the commands
-char commands[16][MAX_STRING] = {
+char commands[15][MAX_STRING] = {
     "getName",
     "getSymbol",
     "getElement",
@@ -22,7 +22,6 @@ char commands[16][MAX_STRING] = {
     "version",
     "credits",
     "repo",
-    ":)",
     "exit"};
 
 
@@ -200,19 +199,6 @@ void command(char command[MAX_STRING])
     case CMD_REPO_HASH:
     {
         repo();
-        break;
-    }
-
-    case CMD_SMILE_HASH:
-    {
-        printf(
-            "Thank you, I'll say goodbye soon\n"
-            "Though its the end of the world\n"
-            "Don't blame yourself\n"
-            "And if its true\n"
-            "I will surround you and give life to a world\n"
-            "That's our own\n"
-            ":)\n");
         break;
     }
 
