@@ -3,49 +3,148 @@
 // @Path : src\periodic.c
 // Contains the periodic table data, functions, and different access methods.
 
-// Contains the elements of the periodic table
-const char elements[118][MAX_STRING] = {
-    "Hydrogen", "Helium", "Lithium", "Beryllium", "Boron", "Carbon", "Nitrogen", "Oxygen", "Fluorine", "Neon", "Sodium", "Magnesium", "Aluminum", "Silicon", "Phosphorus", "Sulfur", "Chlorine", "Argon", "Potassium", "Calcium", "Scandium", "Titanium", "Vanadium", "Chromium", "Manganese", "Iron", "Cobalt", "Nickel", "Copper", "Zinc", "Gallium", "Germanium", "Arsenic", "Selenium", "Bromine", "Krypton", "Rubidium", "Strontium", "Yttrium", "Zirconium", "Niobium", "Molybdenum", "Technetium", "Ruthenium", "Rhodium", "Palladium", "Silver", "Cadmium", "Indium", "Tin", "Antimony", "Tellurium", "Iodine", "Xenon", "Cesium", "Barium", "Lanthanum", "Cerium", "Praseodymium", "Neodymium", "Promethium", "Samarium", "Europium", "Gadolinium", "Terbium", "Dysprosium", "Holmium", "Erbium", "Thulium", "Ytterbium", "Lutetium", "Hafnium", "Tantalum", "Tungsten", "Rhenium", "Osmium", "Iridium", "Platinum", "Gold", "Mercury", "Thallium", "Lead", "Bismuth", "Polonium", "Astatine", "Radon", "Francium", "Radium", "Actinium", "Thorium", "Protactinium", "Uranium", "Neptunium", "Plutonium", "Americium", "Curium", "Berkelium", "Californium", "Einsteinium", "Fermium", "Mendelevium", "Nobelium", "Lawrencium", "Rutherfordium", "Dubnium", "Seaborgium", "Bohrium",  "Hassium", "Meitnerium", "Darmstadtium", "Roentgenium", "Copernicium", "Nihonium", "Flerovium", "Moscovium", "Livermorium", "Tennessine", "Oganesson"
+
+// The elements of the periodic table in an Element array
+// It is going to contain all the elements in the periodic table
+//  
+// The format is:
+// {atomic number, atomic symbol, name, relative atomic mass, group}
+//
+// The group is of type element_group
+Element elements[118] = {
+    {1, "H", "Hydrogen", 1.007, REACTIVE_NONMETALS},
+    {2, "He", "Helium", 4.002602, NOBLE_GASES},
+    {3, "Li", "Lithium", 6.941, ALKALI_METALS},
+    {4, "Be", "Beryllium", 9.0121831, ALKALINE_EARTH_METALS},
+    {5, "B", "Boron", 10.811, METALLOIDS},
+    {6, "C", "Carbon", 12.0107, REACTIVE_NONMETALS},
+    {7, "N", "Nitrogen", 14.0067, REACTIVE_NONMETALS},
+    {8, "O", "Oxygen", 15.9994, REACTIVE_NONMETALS},
+    {9, "F", "Fluorine", 18.9984032, HALOGENS},
+    {10, "Ne", "Neon", 20.1797, NOBLE_GASES},
+    {11, "Na", "Sodium", 22.98976928, ALKALI_METALS},
+    {12, "Mg", "Magnesium", 24.305, ALKALINE_EARTH_METALS},
+    {13, "Al", "Aluminum", 26.9815386, POST_TRANSITION_METALS},
+    {14, "Si", "Silicon", 28.0855, METALLOIDS},
+    {15, "P", "Phosphorus", 30.973762, REACTIVE_NONMETALS},
+    {16, "S", "Sulfur", 32.065, REACTIVE_NONMETALS},
+    {17, "Cl", "Chlorine", 35.453, HALOGENS},
+    {18, "Ar", "Argon", 39.948, NOBLE_GASES},
+    {19, "K", "Potassium", 39.0983, ALKALI_METALS},
+    {20, "Ca", "Calcium", 40.078, ALKALINE_EARTH_METALS},
+    {21, "Sc", "Scandium", 44.955912, TRANSITION_METALS},
+    {22, "Ti", "Titanium", 47.867, TRANSITION_METALS},
+    {23, "V", "Vanadium", 50.9415, TRANSITION_METALS},
+    {24, "Cr", "Chromium", 51.9961, TRANSITION_METALS},
+    {25, "Mn", "Manganese", 54.938045, TRANSITION_METALS},
+    {26, "Fe", "Iron", 55.845, TRANSITION_METALS},
+    {27, "Co", "Cobalt", 58.933195, TRANSITION_METALS},
+    {28, "Ni", "Nickel", 58.6934, TRANSITION_METALS},
+    {29, "Cu", "Copper", 63.546, TRANSITION_METALS},
+    {30, "Zn", "Zinc", 65.38, TRANSITION_METALS},
+    {31, "Ga", "Gallium", 69.723, POST_TRANSITION_METALS},
+    {32, "Ge", "Germanium", 72.630, METALLOIDS},
+    {33, "As", "Arsenic", 74.921595, METALLOIDS},
+    {34, "Se", "Selenium", 78.971, REACTIVE_NONMETALS},
+    {35, "Br", "Bromine", 79.904, HALOGENS},
+    {36, "Kr", "Krypton", 83.798, NOBLE_GASES},
+    {37, "Rb", "Rubidium", 85.4678, ALKALI_METALS},
+    {38, "Sr", "Strontium", 87.62, ALKALINE_EARTH_METALS},
+    {39, "Y", "Yttrium", 88.90585, TRANSITION_METALS},
+    {40, "Zr", "Zirconium", 91.224, TRANSITION_METALS},
+    {41, "Nb", "Niobium", 92.90628, TRANSITION_METALS},
+    {42, "Mo", "Molybdenum", 95.96, TRANSITION_METALS},
+    {43, "Tc", "Technetium", 98, TRANSITION_METALS},
+    {44, "Ru", "Ruthenium", 101.07, TRANSITION_METALS},
+    {45, "Rh", "Rhodium", 102.9055, TRANSITION_METALS},
+    {46, "Pd", "Palladium", 106.42, TRANSITION_METALS},
+    {47, "Ag", "Silver", 107.8682, TRANSITION_METALS},
+    {48, "Cd", "Cadmium", 112.411, TRANSITION_METALS},
+    {49, "In", "Indium", 114.818, POST_TRANSITION_METALS},
+    {50, "Sn", "Tin", 118.71, POST_TRANSITION_METALS},
+    {51, "Sb", "Antimony", 121.76, METALLOIDS},
+    {52, "Te", "Tellurium", 127.6, METALLOIDS},
+    {53, "I", "Iodine", 126.90447, HALOGENS},
+    {54, "Xe", "Xenon", 131.293, NOBLE_GASES},
+    {55, "Cs", "Caesium", 132.9054519, ALKALI_METALS},
+    {56, "Ba", "Barium", 137.327, ALKALINE_EARTH_METALS},
+    {57, "La", "Lanthanum", 138.90547, LANTHANIDES},
+    {58, "Ce", "Cerium", 140.116, LANTHANIDES},
+    {59, "Pr", "Praseodymium", 140.90765, LANTHANIDES},
+    {60, "Nd", "Neodymium", 144.242, LANTHANIDES},
+    {61, "Pm", "Promethium", 145, LANTHANIDES},
+    {62, "Sm", "Samarium", 150.36, LANTHANIDES},
+    {63, "Eu", "Europium", 151.964, LANTHANIDES},
+    {64, "Gd", "Gadolinium", 157.25, LANTHANIDES},
+    {65, "Tb", "Terbium", 158.92535, LANTHANIDES},
+    {66, "Dy", "Dysprosium", 162.5, LANTHANIDES},
+    {67, "Ho", "Holmium", 164.93032, LANTHANIDES},
+    {68, "Er", "Erbium", 167.259, LANTHANIDES},
+    {69, "Tm", "Thulium", 168.93421, LANTHANIDES},
+    {70, "Yb", "Ytterbium", 173.054, LANTHANIDES},
+    {71, "Lu", "Lutetium", 174.9668, LANTHANIDES},
+    {72, "Hf", "Hafnium", 178.49, TRANSITION_METALS},
+    {73, "Ta", "Tantalum", 180.94788, TRANSITION_METALS},
+    {74, "W", "Tungsten", 183.84, TRANSITION_METALS},
+    {75, "Re", "Rhenium", 186.207, TRANSITION_METALS},
+    {76, "Os", "Osmium", 190.23, TRANSITION_METALS},
+    {77, "Ir", "Iridium", 192.217, TRANSITION_METALS},
+    {78, "Pt", "Platinum", 195.084, TRANSITION_METALS},
+    {79, "Au", "Gold", 196.966569, TRANSITION_METALS},
+    {80, "Hg", "Mercury", 200.592, TRANSITION_METALS},
+    {81, "Tl", "Thallium", 204.38, POST_TRANSITION_METALS},
+    {82, "Pb", "Lead", 207.2, POST_TRANSITION_METALS},
+    {83, "Bi", "Bismuth", 208.9804, POST_TRANSITION_METALS},
+    {84, "Po", "Polonium", 209, METALLOIDS},
+    {85, "At", "Astatine", 210, HALOGENS},
+    {86, "Rn", "Radon", 222, NOBLE_GASES},
+    {87, "Fr", "Francium", 223, ALKALI_METALS},
+    {88, "Ra", "Radium", 226, ALKALINE_EARTH_METALS},
+    {89, "Ac", "Actinium", 227, ACTINIDES},
+    {90, "Th", "Thorium", 232.03806, ACTINIDES},
+    {91, "Pa", "Protactinium", 231.0588, ACTINIDES},
+    {92, "U", "Uranium", 238.02891, ACTINIDES},
+    {93, "Np", "Neptunium", 237, ACTINIDES},
+    {94, "Pu", "Plutonium", 244, ACTINIDES},
+    {95, "Am", "Americium", 243, ACTINIDES},
+    {96, "Cm", "Curium", 247, ACTINIDES},
+    {97, "Bk", "Berkelium", 247, ACTINIDES},
+    {98, "Cf", "Californium", 251, ACTINIDES},
+    {99, "Es", "Einsteinium", 252, ACTINIDES},
+    {100, "Fm", "Fermium", 257, ACTINIDES},
+    {101, "Md", "Mendelevium", 258, ACTINIDES},
+    {102, "No", "Nobelium", 259, ACTINIDES},
+    {103, "Lr", "Lawrencium", 262, ACTINIDES},
+    {104, "Rf", "Rutherfordium", 261, TRANSITION_METALS},
+    {105, "Db", "Dubnium", 262, TRANSITION_METALS},
+    {106, "Sg", "Seaborgium", 266, TRANSITION_METALS},
+    {107, "Bh", "Bohrium", 264, TRANSITION_METALS},
+    {108, "Hs", "Hassium", 277, TRANSITION_METALS},
+    {109, "Mt", "Meitnerium", 268, TRANSITION_METALS},
+    {110, "Ds", "Darmstadtium", 281, TRANSITION_METALS},
+    {111, "Rg", "Roentgenium", 272, TRANSITION_METALS},
+    {112, "Cn", "Copernicium", 285, TRANSITION_METALS},
+    {113, "Nh", "Nihonium", 286, POST_TRANSITION_METALS},
+    {114, "Fl", "Flerovium", 289, POST_TRANSITION_METALS},
+    {115, "Mc", "Moscovium", 288, POST_TRANSITION_METALS},
+    {116, "Lv", "Livermorium", 293, POST_TRANSITION_METALS},
+    {117, "Ts", "Tennessine", 294, HALOGENS},
+    {118, "Og", "Oganesson", 294, NOBLE_GASES},
+
 };
 
-// Contains the atomic symbols of the elements
-const char elementSymbols[118][MAX_STRING] = {
-    "H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar", "K", "Ca", "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Ga", "Ge", "As", "Se", "Br", "Kr", "Rb", "Sr", "Y", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "In", "Sn", "Sb", "Te", "I", "Xe", "Cs", "Ba", "La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu", "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg", "Tl", "Pb", "Bi", "Po", "At", "Rn", "Fr", "Ra", "Ac", "Th", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", "Rg", "Cn", "Nh", "Fl", "Mc", "Lv", "Ts", "Og"
-};
-
-//  Contains the definitions of the elements
-// Element _elements[118] = {
-//     //  Place each of the 118 elements here in the following format:
-//     //  {FullName, Symbol, ngConfig, electronConfig, atomicMass}
-//     //  Example:
-//     //  {"Hydrogen", "H", "1s1", "1s1", 1.00784}
-
-    
-
-// };
-
-// Contains the relative atomic mass of the elements
-const double relativeAtomic[118] = {
-    1.007, 4.0026, 6.941, 9.0122, 10.811, 12.011, 14.007, 15.999, 18.998, 20.180, 22.990, 24.305, 26.982, 28.086, 30.974, 32.066, 35.453, 39.948, 39.098, 40.078, 44.956, 47.867, 50.942, 51.996, 54.938, 55.845, 58.933, 58.693, 63.546, 65.390, 69.723, 72.630, 74.922, 78.971, 79.904, 83.798, 85.468, 87.620, 88.906, 91.224, 92.906, 95.940, 98.000, 101.070, 102.906, 106.420, 107.868, 112.411, 114.818, 118.710, 121.760, 127.600, 126.904, 131.293, 132.905, 137.327, 138.906, 140.116, 140.908, 144.242, 145.000, 150.360, 151.964, 157.250, 158.925, 162.500, 164.930, 167.259, 168.934, 173.054, 174.967, 178.490, 180.948, 183.840, 186.207, 190.230, 192.217, 195.078, 196.967, 200.590, 204.383, 207.200, 208.980, 209.000, 210.000, 222.000, 223.000, 226.000, 227.000, 232.038, 231.036, 238.029, 237.000, 244.000, 243.000, 247.000, 247.000, 251.000, 252.000, 257.000, 258
-};
-
-// Contains the atomic number of the elements
-const int atomicNumbers[118] = {
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118
-};
-
-const char allElementGroups[10][MAX_STRING] = {
-    "Alkali Metal", "Metalloid", "Actinide", "Alkaline Earth Metal", "Reactive Nonmetal", "Uknown Properties", "Transition Metal", "Noble Gas", "Post-Transition Metal", "Lanthanide"
-};
 
 // Contains each elements group, from 1-10.
-const int elementsSpecificGroup[118] = {
-    5, 9, 1, 2, 3, 4, 5, 6, 7, 9, 1, 2, 3, 4, 5, 6, 7, 9, 1, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 4, 5, 6, 7, 9, 1, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 4, 5, 6, 7, 9, 1, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 4, 5, 6, 7, 9, 1, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 4, 5, 6, 7, 9, 1, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 4, 5, 6, 7, 9, 1, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 4, 5, 6, 7, 9
-};
+//
+//  Commented out groups are not used in this program ATM.
+//
+// const int elementsSpecificGroup[118] = {
+//     5, 9, 1, 2, 3, 4, 5, 6, 7, 9, 1, 2, 3, 4, 5, 6, 7, 9, 1, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 4, 5, 6, 7, 9, 1, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 4, 5, 6, 7, 9, 1, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 4, 5, 6, 7, 9, 1, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 4, 5, 6, 7, 9, 1, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 4, 5, 6, 7, 9, 1, 2, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 3, 4, 5, 6, 7, 9
+// };
 
-const int nobleGases[8] = {
-    2, 10, 18, 36, 54, 86, 118, 118
-};
+// const int nobleGases[8] = {
+//     2, 10, 18, 36, 54, 86, 118, 118
+// };
 
 // @Usage : api_getElementName("H");
 // @Param : element - The elements symbol.
@@ -59,8 +158,8 @@ void api_getElementName(char element[MAX_STRING]) {
     int i;
     bool found = false;
     for (i = 0; i < 118; i++) {
-        if (strcmp(element, elementSymbols[i]) == 0) {
-            printf("%s", elements[i]);
+        if (strcmp(element, elements[i]._symbol) == 0) {
+            printf("%s", elements[i]._name);
             found = true;
             break;
         }
@@ -82,11 +181,14 @@ void api_getElementSymbol(char element[MAX_STRING]) {
     int i;
     bool found = false;
     for (i = 0; i < 118; i++) {
-        if (strcmp(element, elements[i]) == 0) {
-            printf("%s", elementSymbols[i]);
+        if (strcmp(element, elements[i]._name) == 0) {
+            printf("%s", elements[i]._symbol);
             found = true;
             break;
         }
+    }
+    if (!found) {
+        printf("Element not found.\nName are case sensitive.\n");
     }
 }
 
@@ -98,7 +200,7 @@ void api_getElementSymbol(char element[MAX_STRING]) {
 */
 void api_listAllElements() {
     for (int i = 0; i < 118; i++) {
-        printf("%s\n",elements[i]);
+        printf("Name: %s\t-\tSymbol: %s\t-\tAtomic Number: %d\t-\tRelative Atomic Mass: %.3f\n\n", elements[i]._name, elements[i]._symbol, elements[i]._atomicNumber, elements[i]._relativeAtomic);
     }
 }
 
@@ -111,7 +213,7 @@ void api_listAllElements() {
 */
 void api_getElement(int number) {
     if (number > 0 && number < 119) {
-        printf("%s",elements[number-1]);
+        printf("%s",elements[number-1]._name);
     }
     else {
         printf("Invalid number.\nType a number between 1 and 118.\n");
@@ -125,9 +227,18 @@ void api_getElement(int number) {
     There is no need to pass any arguments.
 */
 void api_listAllElementGroups() {
-    for (int i = 0; i < 10; i++) {
-        printf("%s",allElementGroups[i]);
-    }
+    printf(
+        "1. Alkali metals\n"
+        "2. Alkaline earth metals\n"
+        "3. Lanthanides\n"
+        "4. Actinides\n"
+        "5. Transition metals\n"
+        "6. Post-transition metals\n"
+        "7. Metalloids\n"
+        "8. Nonmetals\n"
+        "9. Halogens\n"
+        "10. Noble gases\n"
+    );
 }
 
 // @Usage : api_getElementGroup();
@@ -141,8 +252,42 @@ void api_getElementGroup(char element[MAX_STRING]) {
     int i;
     bool found = false;
     for (i = 0; i < 118; i++) {
-        if (strcmp(element, elements[i]) == 0) {
-            printf("%s", allElementGroups[elementsSpecificGroup[i]-1]);
+        if (strcmp(element, elements[i]._name) == 0 || strcmp(element, elements[i]._symbol) == 0) {
+            switch(elements[i]._group){
+                case ALKALI_METALS:
+                    printf("Alkali metals");
+                    break;
+                case ALKALINE_EARTH_METALS:
+                    printf("Alkaline earth metals");
+                    break;
+                case LANTHANIDES:
+                    printf("Lanthanides");
+                    break;
+                case ACTINIDES:
+                    printf("Actinides");
+                    break;
+                case TRANSITION_METALS:
+                    printf("Transition metals");
+                    break;
+                case POST_TRANSITION_METALS:
+                    printf("Post-transition metals");
+                    break;
+                case METALLOIDS:
+                    printf("Metalloids");
+                    break;
+                case REACTIVE_NONMETALS:
+                    printf("Reactive Nonmetals");
+                    break;
+                case HALOGENS:
+                    printf("Halogens");
+                    break;
+                case NOBLE_GASES:
+                    printf("Noble gases");
+                    break;
+                default:
+                    printf("Element not found.\nName are case sensitive.\n");
+                    break;
+            }
             found = true;
             break;
         }
@@ -172,11 +317,14 @@ void api_getAtomicNumber(char element[MAX_STRING]) {
     int i;
     bool found = false;
     for (i = 0; i < 118; i++) {
-        if (strcmp(element, elements[i]) == 0) {
-            printf("%s", elementSymbols[i]);
+        if (strcmp(element, elements[i]._name) == 0 || strcmp(element, elements[i]._symbol) == 0) {
+            printf("%d", elements[i]._atomicNumber);
             found = true;
             break;
         }
+    }
+    if (!found) {
+        printf("Element not found.\nName are case sensitive.\n");
     }
 }
 
@@ -184,7 +332,7 @@ void api_getAtomicNumber(char element[MAX_STRING]) {
 // @Param : element - The element to get the molar mass of. (int) atoms - The number of atoms. (int)
 // @Brief : Returns the molar mass of the element.
 void api_getMolarMass(int element, int atoms) {
-    printf("%.3f",relativeAtomic[element - 1]*atoms);
+    printf("%.3f", elements[element-1]._relativeAtomic * atoms);
 }
 
 // @Usage : api_getElectronConfig("Hydrogen");

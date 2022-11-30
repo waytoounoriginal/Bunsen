@@ -82,7 +82,7 @@ void version()
     Takes a command as an input, and executes a function based off of the command name.
     The list of commands is in the commands array.
 */
-void command(char command[MAX_STRING])
+void command(unsigned char command[MAX_STRING])
 {
     printf("\n");
 
@@ -141,7 +141,10 @@ void command(char command[MAX_STRING])
         char _element[MAX_STRING];
         printf("Enter the name or symbol of the element: ");
         scanf("%s", _element);
-        api_getNGConfig(_element);
+
+        //  api_getNGConfig(_element);
+        //  Can't compile
+
         break;
     }
 
@@ -162,7 +165,8 @@ void command(char command[MAX_STRING])
         char _element[MAX_STRING];
         printf("Enter the name or symbol of the element: ");
         scanf("%s", _element);
-        api_getElectronConfig(_element);
+        //  api_getElectronConfig(_element);
+        printf("Work in progress.\n");
         break;
     }
 
@@ -218,9 +222,15 @@ void command(char command[MAX_STRING])
     Command line interface for Periodic Bunsen.
     This function is called from main() in src\main.c
 */
-void cli()
+void cli(int argc, char* argv[])
 {
-    char input[MAX_STRING];
+    for(int i = 1; i < argc; i++){
+        command(argv[i]);
+    }
+    printf("\n");
+
+
+    unsigned char input[MAX_STRING];
 
     printf(STARTING_MESSAGE, VERSION_MAJOR, VERSION_MINOR, VERSION_YEAR);
 
