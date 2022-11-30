@@ -5,7 +5,7 @@ Periodic Bunsen is a free & open-source CLI tool used to work with chemistry and
 Periodic Bunsen is a CLI tool, and is designed to be used in the terminal.
 There are different commands, some commands require arguments, and some don't. To get a list of commands, use the ```help``` command.
 
-The build command is ```gcc main.c cli.c periodic.c -o bunsen```. The executable is called ```bunsen```.
+The build command is ```gcc main.c cli.c periodic.c hash.c -o bunsen```. The executable is called ```bunsen```.
 
 ## Features
 Periodic Bunsen has CLI features, such as periodic table commands and ways to search the periodic table. You can find a list of commands using the ```help``` command.
@@ -13,7 +13,6 @@ Periodic Bunsen has CLI features, such as periodic table commands and ways to se
 ### Planned features
 Periodic Bunsen is still in development, and is not yet complete. Planned features include:
 
-- Giving the electron configuration of an element
 - Calculating the weight of an isotope
 
 ## Installation
