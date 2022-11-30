@@ -308,9 +308,7 @@ void api_listAllElementsInGroup(char group[MAX_STRING]){
     unsigned char _type = 0;
     int length = strlen(group);
 
-    const char * groups = "Alkali metals|Alkaline earth metals|Lanthanides|Actinides|Transition metals|Post-transition metals|Metalloids|Reactive nonmetals|Halogens|Noble gases";
-
-    char *token = strstr(groups, group);
+    char *token = strstr(_groups, group);
 
     if (token == NULL) {
         printf("Group not found.\n");

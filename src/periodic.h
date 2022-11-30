@@ -41,7 +41,7 @@ typedef struct Element
     unsigned char _group;
 } Element;
 
-extern Element elements[118];
+static Element elements[118];
 
 /**
  * @param _symbols is used to store the symbols of the elements and to get the element in a faster way
@@ -57,6 +57,8 @@ static const char *_names = "Hydrogen   |Helium     |Lithium    |Beryllium  |Bor
 
 static const int _symbolMax = 3;
 static const int _nameMax = 12;
+
+static const char * _groups = "Alkali metals|Alkaline earth metals|Lanthanides|Actinides|Transition metals|Post-transition metals|Metalloids|Reactive nonmetals|Halogens|Noble gases";
 
 
 // GET functions
