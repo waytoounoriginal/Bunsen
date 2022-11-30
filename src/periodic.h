@@ -4,7 +4,7 @@
 // Contains the periodic table data, functions, and different access methods.
 
 // Contains the elements of the periodic table
-char elements[118][MAX_STRING];
+extern char elements[118][MAX_STRING];
 
 // GET functions
 void api_getElementName(char element[MAX_STRING]);

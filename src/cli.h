@@ -4,7 +4,7 @@
 // Contains the CLI function(s)
 
 // Contains the commands
-char commands[16][MAX_STRING];
+extern char commands[16][MAX_STRING];
 
 void credits();
 void repo();

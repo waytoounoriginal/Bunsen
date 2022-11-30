@@ -10,7 +10,7 @@
     powershell write-host -fore red Building Bunsen...
 
     : Start the build
-    gcc main.c cli.c periodic.c -o bunsen
+    gcc main.c cli.c periodic.c hash.c -o bunsen
 
     : Move the executable to the root directory
     move bunsen.exe ..
