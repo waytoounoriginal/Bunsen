@@ -5,6 +5,8 @@
 
 // Contains the elements of the periodic table
 char elements[118][MAX_STRING];
+char elementSymbols[118][MAX_STRING];
+double relativeAtomic[118];
 
 // GET functions
 void api_getElementName(char element[MAX_STRING]);
